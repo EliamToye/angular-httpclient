@@ -1,2 +1,22 @@
-<p>fetch works!</p>
+<p>Fetch works!</p>
 <button (click)="fetch()">Fetch</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let light of lightsData">
+      <!-- Status: Display "On" or "Off" -->
+      <td>{{ light.state.on ? 'On' : 'Off' }}</td>
+      
+      <!-- Color: Display the color based on hue value -->
+      <td [style.background-color]="hueToHex(light.state.hue)">
+        {{ hueToHex(light.state.hue) }}
+      </td>
+    </tr>
+  </tbody>
+</table>
