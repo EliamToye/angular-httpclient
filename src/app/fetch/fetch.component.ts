@@ -1,9 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders,HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core'; // Added OnInit import
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { Router } from '@angular/router'; // Import Router for navigation
 import { IndexedDbService } from '../indexed-db.service'; // Assuming service is imported correctly
+
+const httpoption ={
+  headers:new HttpHeaders({
+    'Acces-Control-Allow-Origin':'*'
+  })
+};
 
 @Component({
   selector: 'app-fetch',
@@ -49,7 +55,7 @@ export class FetchComponent implements OnInit {
     const url = `${baseUrl}:8000/api/newdeveloper/lights`; // Use the URL stored in IndexedDB
     console.log(url)
 
-    this.http.get(url).subscribe(
+    this.http.get(url,httpoption).subscribe(
       (data: any) => {
         console.log(data);
         // Map the data to format it for display
