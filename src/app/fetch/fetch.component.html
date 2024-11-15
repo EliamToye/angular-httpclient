@@ -1,11 +1,21 @@
-<p>Fetch works!</p>
+
+<!-- Input field for user-provided host or IP -->
+<div>
+  <label for="hostInput">Enter Host/IP:</label>
+  <input id="hostInput" type="text" [(ngModel)]="userInput" placeholder="Enter host or IP address" />
+</div>
+
+<!-- Fetch button -->
 <button (click)="fetch()">Fetch</button>
 
+<!-- Table to display data -->
 <table>
   <thead>
     <tr>
       <th>Status</th>
       <th>Color</th>
+      <th>Brightness</th> <!-- Add column header for Brightness -->
+      <th>Action</th> <!-- Add Action column for slider -->
     </tr>
   </thead>
   <tbody>
@@ -13,9 +23,42 @@
       <!-- Status: Display "On" or "Off" -->
       <td>{{ light.state.on ? 'On' : 'Off' }}</td>
       
-      <!-- Color: Display the color based on hue value -->
-      <td [style.background-color]="hueToHex(light.state.hue)">
-        {{ hueToHex(light.state.hue) }}
+      <!-- Color: Display the color based on the selected color (hex) -->
+      <td [style.background-color]="light.state.hexColor || hueToHex(light.state.hue)">
+        {{ light.state.hexColor || hueToHex(light.state.hue) }}
+      </td>
+      
+      <!-- Brightness: Display the brightness value -->
+      <td>{{ light.state.bri }}</td>
+
+      <!-- Slider to change brightness -->
+      <td>
+        <input 
+          type="range" 
+          min="0" 
+          max="254" 
+          [(ngModel)]="light.state.bri" 
+          (input)="updateBrightness(light.id, light.state.bri)" 
+          [disabled]="!light.state.on" 
+        />
+        <span>{{ light.state.bri }}</span> <!-- Display current brightness -->
+      </td>
+
+      <!-- Color Picker to change color -->
+      <td>
+        <input 
+          type="color" 
+          [(ngModel)]="light.state.hexColor" 
+          (input)="updateColor(light.id, light.state.hexColor)" 
+          [disabled]="!light.state.on" 
+        />
+      </td>
+
+      <!-- Button to toggle the state of the light (on/off) -->
+      <td>
+        <button (click)="toggleLamp(light.id, light.state.on)">
+          Toggle State
+        </button>
       </td>
     </tr>
   </tbody>
