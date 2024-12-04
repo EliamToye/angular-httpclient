@@ -126,11 +126,45 @@ export class FetchComponent implements OnInit {
     );
   }
 
-  // Hex color conversion
+  // Helper functions for color conversions (unchanged)
+  hueToHex(hue: number): string {
+    const hueNormalized = hue / 65535;
+    const saturation = 1;
+    const lightness = 0.5;
+    const rgb = this.hslToRgb(hueNormalized, saturation, lightness);
+    return this.rgbToHex(rgb);
+  }
+
+  private hslToRgb(h: number, s: number, l: number): number[] {
+    let r, g, b;
+    if (s === 0) {
+      r = g = b = l;
+    } else {
+      const hue2rgb = (p: number, q: number, t: number): number => {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1 / 6) return p + (q - p) * 6 * t;
+        if (t < 1 / 2) return q;
+        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+        return p;
+      };
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1 / 3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1 / 3);
+    }
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+  }
+
+  private rgbToHex(rgb: number[]): string {
+    return '#' + rgb.map((x) => x.toString(16).padStart(2, '0')).join('');
+  }
+
   private hexToHue(hexColor: string): number {
     const rgb = this.hexToRgb(hexColor);
     const hsl = this.rgbToHsl(rgb[0], rgb[1], rgb[2]);
-    return Math.round(hsl[0] * 65535);
+    return Math.round(hsl[0] * 65535); // Convert hue to range 0-65535
   }
 
   private hexToRgb(hex: string): number[] {
@@ -154,14 +188,16 @@ export class FetchComponent implements OnInit {
     g /= 255;
     b /= 255;
 
-    const max = Math.max(r, g, b),
+    let max = Math.max(r, g, b),
       min = Math.min(r, g, b);
     let h = 0,
       s = 0,
       l = (max + min) / 2;
 
-    if (max !== min) {
-      const d = max - min;
+    if (max === min) {
+      h = 0; // achromatic
+    } else {
+      let d = max - min;
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 
       switch (max) {
