@@ -1,8 +1,18 @@
 <div class="configuration-container">
-    <h2>Set URL</h2>
-    <div>
-      <label for="url">Enter URL:</label>
-      <input id="url" [(ngModel)]="url" placeholder="Enter your API URL">
-    </div>
-    <button mat-button (click)="saveUrl()">Save URL</button>
+  <h2>Set URL</h2>
+  <div>
+    <label for="url">Enter URL:</label>
+    <input 
+      id="url" 
+      [(ngModel)]="url" 
+      placeholder="Enter your API URL" 
+      aria-label="API URL"
+    />
   </div>
+  <button 
+    mat-button 
+    (click)="saveUrl()" 
+    [disabled]="!url || url.trim() === ''">
+    Save URL
+  </button>
+</div>

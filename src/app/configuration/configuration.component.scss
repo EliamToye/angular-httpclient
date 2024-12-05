@@ -1,0 +1,81 @@
+/* Container styling */
+.configuration-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Heading styling */
+  .configuration-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Input field styling */
+  .configuration-container label {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  
+  .configuration-container input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  
+  .configuration-container input:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Button styling */
+  .configuration-container button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .configuration-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .configuration-container button:active {
+    background-color: #004494;
+  }
+  
+  .configuration-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .configuration-container {
+      padding: 15px;
+    }
+  
+    .configuration-container input {
+      font-size: 0.9em;
+    }
+  
+    .configuration-container button {
+      font-size: 0.9em;
+    }
+  }

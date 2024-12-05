@@ -1,0 +1,117 @@
+/* General table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  thead {
+    background-color: #f4f4f4;
+  }
+  
+  th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    font-weight: bold;
+  }
+  
+  /* Row styling */
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Status and color cells */
+  td:first-child {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  td:nth-child(2) {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* Slider styling */
+  input[type="range"] {
+    width: 100%;
+    margin: 5px 0;
+    -webkit-appearance: none; /* Remove default appearance */
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default appearance */
+    width: 15px;
+    height: 15px;
+    background-color: #007BFF;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  input[type="range"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Color picker styling */
+  input[type="color"] {
+    cursor: pointer;
+    border: none;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+  
+  input[type="color"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Button styling */
+  button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    table {
+      font-size: 14px;
+    }
+  
+    td, th {
+      padding: 8px;
+    }
+  
+    input[type="range"] {
+      width: 80%;
+    }
+  
+    button {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
